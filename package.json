@@ -1,0 +1,28 @@
+{
+  "name": "signalk-windy-plugin",
+  "version": "0.0.3",
+  "description": "A SignalK plugin that plots your vessel on a windy.com weather map",
+  "keywords": [
+    "signalk-node-server-plugin",
+    "signalk-webapp",
+    "signalk-category-utility"
+  ],
+  "signalk-plugin-enabled-by-default": false,
+  "license": "MIT",
+  "author": "Jeremy Waters",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaffadog/signalk-windy-plugin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jaffadog/signalk-windy-plugin/issues"
+  },
+  "homepage": "https://github.com/jaffadog/signalk-windy-plugin"
+}
