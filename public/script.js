@@ -128,6 +128,12 @@ ws://localhost:3000/signalk/v1/stream?subscribe=none
 // http://localhost:3000/signalk/v2/api/resources/tracks
 
 
+// http://localhost:3000/signalk/v1/api/vessels/urn:mrn:imo:mmsi:368204530/track
+
+// influx v2 returns plain json - not geojson:
+// http://raspberrypi.local/signalk/v1/history/values?from=2025-03-01T00:00:00Z&to=2027-03-25T18:00:00Z&paths=navigation.position&resolution=3600
+
+
 windyInit(options, windyAPI => {
     const { map } = windyAPI;
 
@@ -198,7 +204,42 @@ windyInit(options, windyAPI => {
             
             updateIconStyle();
             
-    })
+            // http://raspberrypi.local/signalk/v1/history/values?from=2025-03-01T00:00:00Z&to=2027-03-25T18:00:00Z&paths=navigation.position&resolution=3600
+            fetch(`/signalk/v1/history/values?from=2025-03-01T00:00:00Z&to=2027-03-25T18:00:00Z&paths=navigation.position&resolution=3600`, { credentials: 'include' })
+            .then(r => r.json())
+            .then(json => {
+                console.log('json',json);
+            });
+            
+            
+/*            
+            fetch(`/signalk/v1/api/vessels/urn:mrn:imo:mmsi:${self.mmsi}/track`, { credentials: 'include' })
+            .then(r => r.json())
+            .then(geojson => {
+                    console.log('geojson',geojson);
+                    
+                    const layer = L.geoJSON(geojson, {
+                        color: `hsl(${hue}, 100%, 45%)`,
+                        weight: 2,
+                    }).addTo(map);
+
+                    layer.on('mouseover', function() {
+                        layer.setStyle({
+                            weight: 4,
+                        });
+                    });
+
+                    layer.on('mouseout', function() {
+                        layer.setStyle({
+                            weight: 2,
+                        });
+                    });
+
+            });
+*/
+            
+    });
+    
 
 
 /*
