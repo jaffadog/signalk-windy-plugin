@@ -2,62 +2,46 @@
  * signalk-windy-plugin
  */
 
-module.exports = function(app) {
+module.exports = function (app) {
     var plugin = {};
-    var unsubscribes = [];
+    var key;
 
     plugin.id = "signalk-windy-plugin";
     plugin.name = "SignalK Windy Plugin";
     plugin.description = "A SignalK plugin that plots your vessel on a windy.com weather map";
 
-    plugin.start = function(options) {
+    plugin.start = function (options) {
         app.debug('Plugin started');
-
-        //foobar = options.foobar;
-
-        var localSubscription = {
-            context: 'vessels.self',
-            subscribe: [{
-                path: 'navigation.position',
-                period: trackInterval * 60 * 1000
-            }]
-        };
-
-        app.subscriptionmanager.subscribe(
-            localSubscription,
-            unsubscribes,
-            subscriptionError => {
-                app.error('Error:' + subscriptionError);
-            },
-            delta => { app.debug(delta); }
-        );
+        key = options.key;
     };
 
-    plugin.stop = function() {
+    plugin.stop = function () {
         app.debug('Stopping the plugin');
-        unsubscribes.forEach(f => f());
-        unsubscribes = [];
     };
 
     plugin.schema = {
         type: 'object',
-        description: 'Hello.',
-        required: ['xxx'],
+        description: `
+            The Windy.com API restricts what web server hostname/domain can be used with any given APi key. The key bundled with this SignalK
+            plugin will work with SignalK servers that are accessed on http://localhost or http://raspberrypi.local. If you are using
+            some other hostname/domain with your SignalK server, then you will need to get your own Windy.com API ket from https://api.windy.com/keys
+            and enable your key for your own hostname/domain. Enter your key below.
+            `,
         properties: {
-            foobar: {
-                title: 'Foo Bar',
+            key: {
+                title: 'Windy.com API key',
                 type: 'string',
-                description: 'It\'s really foobar'
+                description: 'If left blank, the bundled key will be used (see restrictions described above)'
             },
         }
     };
 
     plugin.registerWithRouter = (router) => {
-        // http://raspberrypi.local/plugins/signalk-windy-plugin/hello
-        router.get('/hello', (req, res) => {
-            res.send('hi');
+        // http://raspberrypi.local/plugins/signalk-windy-plugin/key
+        router.get('/key', (req, res) => {
+            res.json(key);
         });
     };
-    
+
     return plugin;
 };
