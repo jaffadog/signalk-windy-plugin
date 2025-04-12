@@ -1,6 +1,6 @@
-/*
- * signalk-windy-plugin
- */
+// signalk-windy-plugin
+// MIT License
+// Copyright (c) 2025 Jeremy Waters <jaffadog@gmail.com>"
 
 module.exports = function (app) {
     var plugin = {};

@@ -5,15 +5,27 @@
 const BUNDLED_WINDY_COM_KEY = 'CpCi6TjvuhporjSGl4FQzIk0Ou77nEDT';
 const DEFAULT_MAP_ZOOM = 6;
 
+var response;
+var vesselId;
+var position;
+var cog;
+
+try {
+    console.log('checking internet access...');
+    var response = await fetch('http://connectivitycheck.gstatic.com/generate_204', { mode: 'no-cors' });
+} catch (err) {
+    alert('You are not online. This app will only work when you have internet access.');
+    throw new Error('you are not online', err);
+}
+
 var response = await fetch('/plugins/signalk-windy-plugin/key', { credentials: 'include' });
 const key = await response.text();
 
 response = await fetch('/signalk/v1/api/vessels/self', { credentials: 'include' });
 const self = await response.json();
 
-let position = self.navigation.position.value;
+position = self.navigation.position.value;
 
-var vesselId;
 
 if (self.mmsi) {
     vesselId = `urn:mrn:imo:mmsi:${self.mmsi}`;
@@ -21,7 +33,7 @@ if (self.mmsi) {
     vesselId = `${self.uuid}`;
 }
 
-let cog = self.navigation.courseOverGroundTrue.value * 180 / Math.PI;
+cog = self.navigation.courseOverGroundTrue.value * 180 / Math.PI;
 
 const options = {
     key: key ? key : BUNDLED_WINDY_COM_KEY,
@@ -73,8 +85,6 @@ windyInit(options, windyAPI => {
     }).addTo(map);
 
     marker.bindPopup(self.name);
-
-
 
     fetch(`/signalk/v1/api/vessels/${vesselId}/track`, { credentials: 'include' })
         .then(r => {
