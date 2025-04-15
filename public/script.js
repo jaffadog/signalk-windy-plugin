@@ -19,7 +19,7 @@ try {
 }
 
 var response = await fetch('/plugins/signalk-windy-plugin/key', { credentials: 'include' });
-const key = await response.text();
+const key = await response.json();
 
 response = await fetch('/signalk/v1/api/vessels/self', { credentials: 'include' });
 const self = await response.json();

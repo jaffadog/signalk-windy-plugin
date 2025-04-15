@@ -1,6 +1,6 @@
 {
   "name": "signalk-windy-plugin",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A SignalK plugin that plots your vessel on a windy.com weather map",
   "keywords": [
     "signalk-node-server-plugin",
