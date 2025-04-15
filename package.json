@@ -8,6 +8,10 @@
     "signalk-category-utility"
   ],
   "signalk-plugin-enabled-by-default": false,
+  "signalk": {
+    "appIcon": "./assets/icons/windy-circle.png",
+    "displayName": "SignalK Windy Plugin"
+  },
   "license": "MIT",
   "author": "Jeremy Waters",
   "type": "commonjs",
