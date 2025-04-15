@@ -39,7 +39,7 @@ module.exports = function (app) {
     plugin.registerWithRouter = (router) => {
         // http://raspberrypi.local/plugins/signalk-windy-plugin/key
         router.get('/key', (req, res) => {
-            res.json(key);
+            res.send(key);
         });
     };
 
