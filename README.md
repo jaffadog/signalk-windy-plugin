@@ -14,6 +14,6 @@ This plugin uses the Windy.com API which requires a license key. A license key h
 
 This is a restriction imposed by Windy.com - which require you to register all the authorized domains on your license key. If you host your SignalK server at a differnt hostname/domain, you will have to:
 
-- Obtain your own **Windi.com API** key at https://api.windy.com/keys
+- Obtain your own **Windy.com Map Forecast API key** at https://api.windy.com/keys (the Windy Plugins API key is not compatible)
 - Configure your **Windy.com API** key to permit your hostname/domain
 - Enter your key on the **SignalK Windy Plugin** configuration screen

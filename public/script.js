@@ -10,14 +10,6 @@ var vesselId;
 var position;
 var cog;
 
-try {
-    console.log('checking internet access...');
-    var response = await fetch('http://connectivitycheck.gstatic.com/generate_204', { mode: 'no-cors' });
-} catch (err) {
-    alert('You are not online. This app will only work when you have internet access.');
-    throw new Error('you are not online', err);
-}
-
 var response = await fetch('/plugins/signalk-windy-plugin/key', { credentials: 'include' });
 const key = await response.text();
 
